@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
+// 555
     public static final String BUNDLES_FOLDER = "bundles.Locale";
 
     @Override
