@@ -1,6 +1,8 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,9 +15,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
-public class ControllerMain implements Initializable {
+public class ControllerMain extends Observable implements Initializable {
 
     ResourceBundle resourceBundle;
 
@@ -73,6 +76,30 @@ public class ControllerMain implements Initializable {
         } else {
             comboLocales.getSelectionModel().select(LocaleManager.getCurrentLanguage().getIndex());
         }
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                // слушаем изменение языка
+                comboLocales.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        Language selectedLang = (Language) comboLocales.getSelectionModel().getSelectedItem();
+                        LocaleManager.setCurrentLanguage(selectedLang);
+
+                        // уведомить всех слушателей, что произошла смена языка
+                        setChanged();
+                        notifyObservers(selectedLang);
+                        System.out.println("Изменение языка");
+                        //fillLangCombobox();
+                    }
+                });
+
+            }
+        });
+
+
+
     }
 
 
@@ -80,5 +107,9 @@ public class ControllerMain implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.resourceBundle = resources;
         fillLangCombobox();
+
+
+
+
     }
 }
