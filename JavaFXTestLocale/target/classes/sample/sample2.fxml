@@ -11,9 +11,9 @@
 
 <AnchorPane fx:id="AnchorPain2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller2">
    <children>
-      <Button fx:id="buttonWin3" layoutX="200.0" layoutY="155.0" mnemonicParsing="false" onAction="#GoToWin3" prefHeight="25.0" prefWidth="150.0" text="%key.unspecified" AnchorPane.rightAnchor="15.0" />
-      <Button fx:id="buttonWinMain" layoutX="46.0" layoutY="155.0" mnemonicParsing="false" onAction="#GoToWinMain" prefHeight="25.0" prefWidth="150.0" text="%key.unspecified" AnchorPane.leftAnchor="15.0" />
-      <Label alignment="CENTER" layoutX="64.0" layoutY="50.0" prefHeight="17.0" prefWidth="190.0" text="%key.unspecified" textAlignment="CENTER" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0">
+      <Button fx:id="buttonWin3" layoutX="200.0" layoutY="155.0" mnemonicParsing="false" onAction="#GoToWin3" prefHeight="25.0" prefWidth="150.0" text="%win3" AnchorPane.rightAnchor="15.0" />
+      <Button fx:id="buttonWinMain" layoutX="46.0" layoutY="155.0" mnemonicParsing="false" onAction="#GoToWinMain" prefHeight="25.0" prefWidth="150.0" text="%label_main_window" AnchorPane.leftAnchor="15.0" />
+      <Label alignment="CENTER" layoutX="64.0" layoutY="50.0" prefHeight="17.0" prefWidth="190.0" text="%window2" textAlignment="CENTER" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0">
          <font>
             <Font size="28.0" />
          </font>

@@ -65,15 +65,12 @@ public static final String FXML_MAIN = "sampleMain.fxml";
 
     }
 
-
     // Загружаем дерево компонентов и возвращаем в виде AnchorPane (корневой элемент в FXML)
     private AnchorPane loadFXML(Locale locale) {
         fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource(FXML_MAIN));
         fxmlLoader.setResources(ResourceBundle.getBundle(BUNDLES_FOLDER, locale));
-
         AnchorPane node = null;
-
         try {
             node = (AnchorPane) fxmlLoader.load();
             controllerMain = fxmlLoader.getController();

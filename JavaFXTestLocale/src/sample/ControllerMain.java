@@ -15,12 +15,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
+
+import static sample.LocaleManager.getCurrentLanguage;
 
 public class ControllerMain extends Observable implements Initializable {
 
     ResourceBundle resourceBundle;
+    private Controller2 controller2;
 
     @FXML
     private ComboBox<Language> comboLocales;
@@ -36,32 +41,41 @@ public class ControllerMain extends Observable implements Initializable {
 
     public static final String RU_CODE = "ru";
     public static final String EN_CODE = "en";
+    Language language;
+
 
     @FXML
     void GoToWin3(ActionEvent event) {
         Parent root = null;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample3.fxml"));
+        language = getCurrentLanguage();
+        ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample3.fxml"), resourceBundle);
+
         try {
             root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
         Scene scene = new Scene(root);
-        ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
+        ((Stage) buttonWin3.getScene().getWindow()).setScene(scene);
 
     }
 
     @FXML
     void GoToWin2(ActionEvent event) {
         Parent root = null;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample2.fxml"));
+
+        ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample2.fxml"), resourceBundle);
+        controller2 = loader.getController();
+
         try {
             root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
         Scene scene = new Scene(root);
-        ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
+        ((Stage) buttonWin2.getScene().getWindow()).setScene(scene);
     }
 
     private void fillLangCombobox() {
@@ -71,10 +85,10 @@ public class ControllerMain extends Observable implements Initializable {
         comboLocales.getItems().add(langRU);
         comboLocales.getItems().add(langEN);
 
-        if (LocaleManager.getCurrentLanguage() == null) { // по умолчанию показывать русский язык
+        if (getCurrentLanguage() == null) { // по умолчанию показывать русский язык
             comboLocales.getSelectionModel().select(0);
         } else {
-            comboLocales.getSelectionModel().select(LocaleManager.getCurrentLanguage().getIndex());
+            comboLocales.getSelectionModel().select(getCurrentLanguage().getIndex());
         }
 
         Platform.runLater(new Runnable() {
@@ -107,6 +121,7 @@ public class ControllerMain extends Observable implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.resourceBundle = resources;
         fillLangCombobox();
+        System.out.println(getCurrentLanguage());
 
 
 

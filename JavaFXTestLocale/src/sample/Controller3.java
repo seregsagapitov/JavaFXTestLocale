@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 
 public class Controller3 {
@@ -25,7 +26,8 @@ public class Controller3 {
     @FXML
     void GoToWin2(ActionEvent event) {
         Parent root = null;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample2.fxml"));
+        ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample2.fxml"), resourceBundle);
         try {
             root = loader.load();
         } catch (IOException e) {
@@ -39,7 +41,8 @@ public class Controller3 {
     @FXML
     void GoToWinMain(ActionEvent event) {
         Parent root = null;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sampleMain.fxml"));
+        ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sampleMain.fxml"), resourceBundle);
         try {
             root = loader.load();
         } catch (IOException e) {
