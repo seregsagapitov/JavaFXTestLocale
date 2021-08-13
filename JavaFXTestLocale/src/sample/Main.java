@@ -82,7 +82,7 @@ public static final String FXML_MAIN = "sampleMain.fxml";
         return node;
     }
 
-    private void createGUI(Locale locale) {
+    public void createGUI(Locale locale) {
         currentRoot = loadFXML(locale);
         Scene scene = new Scene(currentRoot, 400, 400);
         primaryStage.setScene(scene);

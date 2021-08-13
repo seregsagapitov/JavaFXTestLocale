@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 import static sample.LocaleManager.getCurrentLanguage;
 
-public class ControllerMain extends Observable implements Initializable {
+public class ControllerMain extends Observable {
 
     ResourceBundle resourceBundle;
     private Controller2 controller2;
@@ -44,10 +44,41 @@ public class ControllerMain extends Observable implements Initializable {
     Language language;
 
 
+    public void lisenCombo() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                // слушаем изменение языка
+                comboLocales.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        Language selectedLang = (Language) comboLocales.getSelectionModel().getSelectedItem();
+                        LocaleManager.setCurrentLanguage(selectedLang);
+
+                        // уведомить всех слушателей, что произошла смена языка
+                        setChanged();
+                        notifyObservers(selectedLang);
+                        System.out.println("Изменение языка");
+                        //fillLangCombobox();
+                    }
+                });
+
+            }
+        });
+    }
+
+    @FXML
+    private void initialize() {
+        resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+        fillLangCombobox();
+        lisenCombo();
+
+
+    }
+
     @FXML
     void GoToWin3(ActionEvent event) {
         Parent root = null;
-        language = getCurrentLanguage();
         ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("sample3.fxml"), resourceBundle);
 
@@ -78,7 +109,7 @@ public class ControllerMain extends Observable implements Initializable {
         ((Stage) buttonWin2.getScene().getWindow()).setScene(scene);
     }
 
-    private void fillLangCombobox() {
+    public void fillLangCombobox() {
         Language langRU = new Language(RU_CODE, resourceBundle.getString("ru"), LocaleManager.RU_LOCALE, 0);
         Language langEN = new Language(EN_CODE, resourceBundle.getString("en"), LocaleManager.EN_LOCALE, 1);
 
@@ -91,40 +122,15 @@ public class ControllerMain extends Observable implements Initializable {
             comboLocales.getSelectionModel().select(getCurrentLanguage().getIndex());
         }
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                // слушаем изменение языка
-                comboLocales.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        Language selectedLang = (Language) comboLocales.getSelectionModel().getSelectedItem();
-                        LocaleManager.setCurrentLanguage(selectedLang);
-
-                        // уведомить всех слушателей, что произошла смена языка
-                        setChanged();
-                        notifyObservers(selectedLang);
-                        System.out.println("Изменение языка");
-                        //fillLangCombobox();
-                    }
-                });
-
-            }
-        });
-
-
 
     }
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        this.resourceBundle = resources;
-        fillLangCombobox();
-        System.out.println(getCurrentLanguage());
-
-
-
-
-    }
+//    @Override
+//    public void initialize(URL location, ResourceBundle resources) {
+//        this.resourceBundle = resources;
+//        fillLangCombobox();
+//        System.out.println(getCurrentLanguage());
+//
+//    }
 }
