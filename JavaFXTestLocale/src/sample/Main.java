@@ -14,22 +14,9 @@ import java.util.Observer;
 import java.util.ResourceBundle;
 
 public class Main extends Application implements Observer {
-// 555
-//    public static final String BUNDLES_FOLDER = "bundles.Locale";
-//
-//    @Override
-//    public void start(Stage primaryStage) throws Exception{
-//        Parent root = FXMLLoader.load(getClass().getResource("sampleMain.fxml"));
-//        primaryStage.setTitle("Hello World");
-//        primaryStage.setScene(new Scene(root, 400, 400));
-//        primaryStage.show();
-//    }
-//
-//
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
-public static final String FXML_MAIN = "sampleMain.fxml";
+    // 555
+
+    public static final String FXML_MAIN = "sampleMain.fxml";
     public static final String BUNDLES_FOLDER = "sample.bundles.Locale";
     private static Stage primaryStage;
     private Parent fxmlMain;
@@ -47,10 +34,12 @@ public static final String FXML_MAIN = "sampleMain.fxml";
 
     private AnchorPane currentRoot;
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         createGUI(LocaleManager.RU_LOCALE);
+
     }
 
     public static void main(String[] args) {
@@ -74,8 +63,10 @@ public static final String FXML_MAIN = "sampleMain.fxml";
         try {
             node = (AnchorPane) fxmlLoader.load();
             controllerMain = fxmlLoader.getController();
+
             controllerMain.addObserver(this);
             primaryStage.setTitle(fxmlLoader.getResources().getString("testJavaLocale"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,11 +80,6 @@ public static final String FXML_MAIN = "sampleMain.fxml";
         primaryStage.setResizable(false);
         primaryStage.show();
     }
-
-
-
-
-
 
 
 }

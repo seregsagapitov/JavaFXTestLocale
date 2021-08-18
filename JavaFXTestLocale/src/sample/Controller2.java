@@ -16,7 +16,7 @@ import java.util.Observer;
 import java.util.ResourceBundle;
 
 
-public class Controller2 implements Observer {
+public class Controller2 {
     ResourceBundle resourceBundle;
     ControllerMain controllerMain;
     @FXML
@@ -31,8 +31,7 @@ public class Controller2 implements Observer {
     @FXML
     void GoToWin3(ActionEvent event) {
         Parent root = null;
-
-        ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+        resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.currentLanguage.getLocale());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("sample3.fxml"), resourceBundle);
         try {
             root = loader.load();
@@ -47,27 +46,10 @@ public class Controller2 implements Observer {
     void GoToWinMain(ActionEvent event) {
         Main main = new Main();
         resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
-        main.createGUI(LocaleManager.RU_LOCALE);
-//        Parent root = null;
-//        ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("sampleMain.fxml"), resourceBundle);
-////        controllerMain = loader.getController();
-////        controllerMain.fillLangCombobox();
-////        controllerMain.lisenCombo();
-//
-//        try {
-//            root = loader.load();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Scene scene = new Scene(root);
-//        ((Stage) AnchorPain2.getScene().getWindow()).setScene(scene);
+        main.createGUI(LocaleManager.currentLanguage.getLocale());
+
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        System.out.println("jdkejwfrjf");
-    }
 
 
 }

@@ -15,6 +15,8 @@ import java.util.ResourceBundle;
 
 public class Controller3 {
 
+
+    ResourceBundle resourceBundle;
     @FXML
     private AnchorPane AnchorPain3;
     @FXML
@@ -26,7 +28,7 @@ public class Controller3 {
     @FXML
     void GoToWin2(ActionEvent event) {
         Parent root = null;
-        ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+        resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.currentLanguage.getLocale());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("sample2.fxml"), resourceBundle);
         try {
             root = loader.load();
@@ -40,16 +42,9 @@ public class Controller3 {
 
     @FXML
     void GoToWinMain(ActionEvent event) {
-        Parent root = null;
-        ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sampleMain.fxml"), resourceBundle);
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Scene scene = new Scene(root);
-        ((Stage) AnchorPain3.getScene().getWindow()).setScene(scene);
+        Main main = new Main();
+        resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+        main.createGUI(LocaleManager.currentLanguage.getLocale());
     }
 
 }
